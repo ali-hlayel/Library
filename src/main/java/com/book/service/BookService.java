@@ -1,10 +1,10 @@
 package com.book.service;
 
-import com.book.sharedDto.BookDto;
+import com.book.book.Book;
 
 public interface BookService {
 
-    BookDto createBook(BookDto book);
+    Book createBook(Book book);
 
-    BookDto getBookByBookId(String BookId);
+    Book getBookByBookId(String BookId);
 }

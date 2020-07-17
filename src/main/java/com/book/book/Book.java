@@ -1,8 +1,8 @@
-package com.book.sharedDto;
+package com.book.book;
 
 import java.io.Serializable;
 
-public class BookDto implements Serializable {
+public class Book implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

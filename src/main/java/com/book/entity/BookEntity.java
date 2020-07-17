@@ -1,5 +1,7 @@
 package com.book.entity;
 
+import com.book.book.Book;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -64,4 +66,5 @@ public class BookEntity implements Serializable {
     public void setSerialNumber(String serialNumber) {
         this.serialNumber = serialNumber;
     }
+
 }
