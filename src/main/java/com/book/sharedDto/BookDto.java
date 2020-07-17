@@ -14,6 +14,8 @@ public class BookDto implements Serializable {
 
     private String bookAuthor;
 
+    private String serialNumber;
+
     public long getId() {
         return id;
     }
@@ -44,5 +46,13 @@ public class BookDto implements Serializable {
 
     public void setBookAuthor(String bookAuthor) {
         this.bookAuthor = bookAuthor;
+    }
+
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
     }
 }

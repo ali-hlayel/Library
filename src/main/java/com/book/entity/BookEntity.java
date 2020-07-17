@@ -1,12 +1,10 @@
 package com.book.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity(name = "books")
+@Entity
+@Table(name="books")
 public class BookEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -18,7 +16,7 @@ public class BookEntity implements Serializable {
     @Column(nullable = false)
     private String bookId;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 100, unique = true)
     private String bookTitle;
 
     @Column(nullable = false, length = 50)

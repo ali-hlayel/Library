@@ -15,9 +15,13 @@ public class BookController {
     @Autowired
     BookService bookService;
 
-    @GetMapping
-    public String getBook(){
-        return "get book was called";
+    @GetMapping(path = "/{bookId}")
+    public BookResponseModel getBook(@PathVariable String bookId){
+        BookResponseModel bookResponseModel = new BookResponseModel();
+
+        BookDto bookDto = bookService.getBookByBookId(bookId);
+        BeanUtils.copyProperties(bookDto, bookResponseModel);
+        return bookResponseModel;
     }
 
     @PostMapping

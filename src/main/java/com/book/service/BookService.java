@@ -5,4 +5,6 @@ import com.book.sharedDto.BookDto;
 public interface BookService {
 
     BookDto createBook(BookDto book);
+
+    BookDto getBookByBookId(String BookId);
 }
