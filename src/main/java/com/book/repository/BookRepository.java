@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BookRepository extends PagingAndSortingRepository<BookEntity, Long> {
+
     BookEntity findByBookTitle(String bookTitle);
 
     BookEntity findByBookId(String bookId);

@@ -3,7 +3,8 @@ package com.book.exceptions;
 public enum ErrorMessages {
     MISSING_REQUIRED_FIELD("Missing required field. Please check documentation for required fields"),
     RECORD_ALREADY_EXIST("Record already exists"),
-    INTERNAL_SERVER_ERROR("Internal server error");
+    INTERNAL_SERVER_ERROR("Internal server error"),
+    BOOK_IS_NOT_FOUND("Book is not found in the database");
 
     private String errorMessage;
 
