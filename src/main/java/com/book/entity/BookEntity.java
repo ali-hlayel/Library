@@ -1,9 +1,10 @@
 package com.book.entity;
 
-import com.book.book.Book;
+import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name="books")
@@ -18,14 +19,20 @@ public class BookEntity implements Serializable {
     @Column(nullable = false)
     private String bookId;
 
-    @Column(nullable = false, length = 100, unique = true)
+    @Column(length = 100, unique = true)
+    @NotNull
     private String bookTitle;
 
-    @Column(nullable = false, length = 50)
+    @Column(length = 50)
+    @NotNull
     private String bookAuthor;
 
-    @Column(nullable = false, length = 70)
+    @Column(length = 70)
+    @NotNull
     private String serialNumber;
+
+    @OneToMany(mappedBy = "bookDetails", cascade = CascadeType.ALL)
+    private List<AddressEntity> addresses;
 
     public long getId() {
         return id;
@@ -67,4 +74,11 @@ public class BookEntity implements Serializable {
         this.serialNumber = serialNumber;
     }
 
+    public List<AddressEntity> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<AddressEntity> addresses) {
+        this.addresses = addresses;
+    }
 }

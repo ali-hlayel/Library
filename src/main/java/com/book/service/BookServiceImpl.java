@@ -1,13 +1,14 @@
 package com.book.service;
 
+import com.book.address.Address;
 import com.book.entity.BookEntity;
 import com.book.exceptions.BookServiceException;
 import com.book.exceptions.ErrorMessages;
-import com.book.model.BookCreateQueryModel;
 import com.book.model.BookUpdateQueryModel;
 import com.book.repository.BookRepository;
 import com.book.book.Book;
 import com.book.utils.Utils;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,7 +16,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.NoResultException;
-import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,14 +45,19 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public Book createBook(BookCreateQueryModel book) {
+    public Book createBook(Book book) {
         if(bookRepository.findByBookTitle(book.getBookTitle()) != null) throw new RuntimeException("Book already Exist");
+
+        for(Address address: book.getAddresses()) {
+            address.setBookDetails(book);
+        }
+
+        ModelMapper modelMapper = new ModelMapper();
         BookEntity bookEntity = new BookEntity();
         bookEntity.setBookId(utils.generateBookId(15));
-        BeanUtils.copyProperties(book, bookEntity);
+        bookEntity = modelMapper.map(book, BookEntity.class);
         BookEntity savedBookDetails = bookRepository.save(bookEntity);
-        Book returnValue = new Book();
-        BeanUtils.copyProperties(savedBookDetails, returnValue);
+        Book returnValue = modelMapper.map(savedBookDetails, Book.class);
         return returnValue;
     }
 

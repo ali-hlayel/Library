@@ -1,4 +1,4 @@
-package com.book.Conttroller;
+package com.book.conttroller;
 
 import com.book.entity.BookEntity;
 import com.book.exceptions.BookServiceException;
@@ -9,6 +9,7 @@ import com.book.responseModel.BookResponseModel;
 import com.book.responseModel.OperationStatusModel;
 import com.book.service.BookService;
 import com.book.book.Book;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,9 +52,11 @@ public class BookController {
     public BookResponseModel createBook(@RequestBody BookCreateQueryModel bookCreateQueryModel) {
         if (bookCreateQueryModel.getBookTitle().isEmpty())
             throw new BookServiceException(ErrorMessages.MISSING_REQUIRED_FIELD.getErrorMessage());
-        BookResponseModel bookResponseModel = new BookResponseModel();
-        Book createBook = bookService.createBook(bookCreateQueryModel);
-        BeanUtils.copyProperties(createBook, bookResponseModel);
+        ModelMapper modelMapper = new ModelMapper();
+        Book book = modelMapper.map(bookCreateQueryModel, Book.class);
+        BookResponseModel bookResponseModel;
+        Book createBook = bookService.createBook(book);
+        bookResponseModel = modelMapper.map(createBook, BookResponseModel.class);
         return bookResponseModel;
     }
 

@@ -1,6 +1,9 @@
 package com.book.book;
 
+import com.book.address.Address;
+
 import java.io.Serializable;
+import java.util.List;
 
 public class Book implements Serializable {
 
@@ -15,6 +18,8 @@ public class Book implements Serializable {
     private String bookAuthor;
 
     private String serialNumber;
+
+    private List<Address> addresses;
 
     public long getId() {
         return id;
@@ -54,5 +59,13 @@ public class Book implements Serializable {
 
     public void setSerialNumber(String serialNumber) {
         this.serialNumber = serialNumber;
+    }
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
     }
 }

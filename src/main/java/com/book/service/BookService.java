@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface BookService {
 
-    Book createBook(BookCreateQueryModel book);
+    Book createBook(Book book);
 
     Book getBookByBookId(String BookId);
 
