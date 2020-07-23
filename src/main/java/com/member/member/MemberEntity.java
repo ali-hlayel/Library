@@ -5,6 +5,7 @@ import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -16,9 +17,6 @@ public class MemberEntity implements Serializable {
     @Id
     @GeneratedValue
     private long id;
-
-    @Column(nullable = false)
-    private String memberId;
 
     @Column(length = 100, unique = true)
     @NotNull
@@ -32,6 +30,13 @@ public class MemberEntity implements Serializable {
     @NotNull
     private String serialNumber;
 
+    @Column(length = 70)
+    @NotNull
+    private String memberId;
+
+    @Column(length = 70)
+    private LocalDate birthDate;
+
     @OneToMany(mappedBy = "memberDetails", cascade = CascadeType.ALL)
     private List<AddressEntity> addresses;
 
@@ -41,14 +46,6 @@ public class MemberEntity implements Serializable {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getMemberId() {
-        return memberId;
-    }
-
-    public void setMemberId(String memberId) {
-        this.memberId = memberId;
     }
 
     public String getFirstName() {
@@ -81,5 +78,21 @@ public class MemberEntity implements Serializable {
 
     public void setAddresses(List<AddressEntity> addresses) {
         this.addresses = addresses;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
     }
 }

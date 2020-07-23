@@ -9,5 +9,5 @@ public interface MemberRepository extends PagingAndSortingRepository<MemberEntit
 
     MemberEntity findByFirstName(String firstName);
 
-    MemberEntity findMemberByMemberId(String memberId);
+    MemberEntity findMemberById(long id);
 }

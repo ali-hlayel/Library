@@ -10,11 +10,11 @@ public interface MemberService {
 
     Member createMember(Member member);
 
-    Member getMemberByMemberId(String BookId);
+    Member getMemberById(long id);
 
-    Member updateMember(String bookId, MemberUpdateQueryModel book);
+    Member updateMember(long id, MemberUpdateQueryModel book);
 
-    void deleteMember(String bookId);
+    void deleteMember(long id);
 
     List<MemberEntity> getMembers(int page, int limit);
 

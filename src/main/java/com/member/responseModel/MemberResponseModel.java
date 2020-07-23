@@ -1,8 +1,8 @@
 package com.member.responseModel;
 
-import org.springframework.hateoas.RepresentationModel;
+public class MemberResponseModel {
 
-public class MemberResponseModel extends RepresentationModel {
+    private long id ;
 
     private String memberId;
 
@@ -34,5 +34,21 @@ public class MemberResponseModel extends RepresentationModel {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 }

@@ -1,10 +1,9 @@
 package com.member.model;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class MemberCreateQueryModel {
-
-    private String userId;
 
     private String firstName;
 
@@ -12,15 +11,11 @@ public class MemberCreateQueryModel {
 
     private String serialNumber;
 
+    private String memberId;
+
+    private LocalDate birthDate;
+
     private List<AddressRequestModel> addresses;
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -52,5 +47,21 @@ public class MemberCreateQueryModel {
 
     public void setAddresses(List<AddressRequestModel> addresses) {
         this.addresses = addresses;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
     }
 }

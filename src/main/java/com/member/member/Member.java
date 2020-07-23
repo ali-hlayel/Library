@@ -3,6 +3,7 @@ package com.member.member;
 import com.member.address.Address;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 
 public class Member implements Serializable {
@@ -11,13 +12,15 @@ public class Member implements Serializable {
 
     private long id;
 
-    private String memberId;
-
     private String firstName;
 
     private String lastName;
 
     private String serialNumber;
+
+    private LocalDate birthDate;
+
+    private String memberId;
 
     private List<Address> addresses;
 
@@ -27,14 +30,6 @@ public class Member implements Serializable {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getMemberId() {
-        return memberId;
-    }
-
-    public void setMemberId(String memberId) {
-        this.memberId = memberId;
     }
 
     public String getFirstName() {
@@ -67,5 +62,21 @@ public class Member implements Serializable {
 
     public void setAddresses(List<Address> addresses) {
         this.addresses = addresses;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
     }
 }

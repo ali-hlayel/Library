@@ -10,15 +10,17 @@ import com.member.responseModel.MemberResponseModel;
 import com.member.responseModel.OperationStatusModel;
 import com.member.service.MemberService;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("books")
+@RequestMapping("members")
 public class MemberController {
 
     @Autowired
@@ -29,19 +31,20 @@ public class MemberController {
                                               @RequestParam(value = "limit", defaultValue = "10") int limit) {
         List<MemberResponseModel> returnValue = new ArrayList<>();
         List<MemberEntity> books = memberService.getMembers(page, limit);
+        ModelMapper modelMapper = new ModelMapper();
         for (MemberEntity book : books) {
-            MemberResponseModel memberResponseModel = new MemberResponseModel();
-            BeanUtils.copyProperties(book, memberResponseModel);
-            returnValue.add(memberResponseModel);
+            returnValue.add(modelMapper.map(book, MemberResponseModel.class));
         }
         return returnValue;
     }
 
-    @GetMapping(path = "/{bookId}")
-    public MemberResponseModel getBook(@PathVariable String bookId) {
-        Member member = memberService.getMemberByMemberId(bookId);
+    @GetMapping(path = "/{id}")
+    public EntityModel<MemberResponseModel> getBook(@PathVariable long id) {
+        Member member = memberService.getMemberById(id);
         ModelMapper modelMapper = new ModelMapper();
-        return modelMapper.map(member, MemberResponseModel.class);
+        MemberResponseModel returnValue = modelMapper.map(member, MemberResponseModel.class);
+        Link memberLink = WebMvcLinkBuilder.linkTo(MemberController.class).slash(id).withRel("members");
+        return EntityModel.of(returnValue, memberLink);
     }
 
     @PostMapping
@@ -50,27 +53,27 @@ public class MemberController {
             throw new MemberServiceException(ErrorMessages.MISSING_REQUIRED_FIELD.getErrorMessage());
         ModelMapper modelMapper = new ModelMapper();
         Member member = modelMapper.map(memberCreateQueryModel, Member.class);
-        MemberResponseModel memberResponseModel;
         Member createMember = memberService.createMember(member);
-        memberResponseModel = modelMapper.map(createMember, MemberResponseModel.class);
+        MemberResponseModel memberResponseModel = modelMapper.map(createMember, MemberResponseModel.class);
         return memberResponseModel;
     }
 
-    @PutMapping(path = "/{bookId}")
-    public MemberResponseModel updateBook(@PathVariable String bookId, @RequestBody MemberUpdateQueryModel memberUpdateQueryModel) {
+    @PutMapping(path = "/{id}")
+    public EntityModel<MemberResponseModel> updateBook(@PathVariable long id, @RequestBody MemberUpdateQueryModel memberUpdateQueryModel) {
         if (memberUpdateQueryModel.getFirstName().isEmpty())
             throw new MemberServiceException(ErrorMessages.MISSING_REQUIRED_FIELD.getErrorMessage());
-        MemberResponseModel memberResponseModel = new MemberResponseModel();
-        Member updateMember = memberService.updateMember(bookId, memberUpdateQueryModel);
-        BeanUtils.copyProperties(updateMember, memberResponseModel);
-        return memberResponseModel;
+        Member updateMember = memberService.updateMember(id, memberUpdateQueryModel);
+        ModelMapper modelMapper = new ModelMapper();
+        MemberResponseModel returnValue = modelMapper.map(updateMember, MemberResponseModel.class);
+        Link memberLink = WebMvcLinkBuilder.linkTo(MemberController.class).slash(id).withRel("members");
+        return EntityModel.of(returnValue, memberLink);
     }
 
-    @DeleteMapping(path = "/{bookId}")
-    public OperationStatusModel deleteBook(@PathVariable String bookId) {
+    @DeleteMapping(path = "/{id}")
+    public OperationStatusModel deleteBook(@PathVariable long id) {
         OperationStatusModel returnValue = new OperationStatusModel();
         returnValue.setOperationName("Delete");
-        memberService.deleteMember(bookId);
+        memberService.deleteMember(id);
         returnValue.setOperationStatus("Done");
         return returnValue;
     }

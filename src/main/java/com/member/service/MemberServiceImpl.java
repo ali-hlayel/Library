@@ -53,8 +53,7 @@ public class MemberServiceImpl implements MemberService {
         }
 
         ModelMapper modelMapper = new ModelMapper();
-        MemberEntity MemberEntity = new MemberEntity();
-        MemberEntity.setMemberId(utils.generateBookId(15));
+        MemberEntity MemberEntity;
         MemberEntity = modelMapper.map(member, MemberEntity.class);
         MemberEntity savedBookDetails = memberRepository.save(MemberEntity);
         Member returnValue = modelMapper.map(savedBookDetails, Member.class);
@@ -62,17 +61,17 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public Member getMemberByMemberId(String bookId) throws NoResultException{
+    public Member getMemberById(long id) throws NoResultException{
           Member returnValue = new Member();
-        MemberEntity MemberEntity = memberRepository.findMemberByMemberId(bookId);
+        MemberEntity MemberEntity = memberRepository.findMemberById(id);
         BeanUtils.copyProperties(MemberEntity, returnValue);
         return returnValue;
     }
 
     @Override
-    public Member updateMember(String bookId, MemberUpdateQueryModel book) throws MemberServiceException {
+    public Member updateMember(long id, MemberUpdateQueryModel book) throws MemberServiceException {
         Member returnValue = new Member();
-        MemberEntity result = memberRepository.findMemberByMemberId(bookId);
+        MemberEntity result = memberRepository.findMemberById(id);
         if(result == null) throw new MemberServiceException(ErrorMessages.BOOK_IS_NOT_FOUND.getErrorMessage());
        result.setFirstName(book.getFirstName());
        result.setLastName(book.getLastName());
@@ -82,8 +81,8 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void deleteMember(String bookId) {
-        MemberEntity result = memberRepository.findMemberByMemberId(bookId);
+    public void deleteMember(long id) {
+        MemberEntity result = memberRepository.findMemberById(id);
         if(result == null) throw new MemberServiceException(ErrorMessages.BOOK_IS_NOT_FOUND.getErrorMessage());
         memberRepository.delete(result);
     }
