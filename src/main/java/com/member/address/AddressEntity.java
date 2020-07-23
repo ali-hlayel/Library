@@ -1,5 +1,6 @@
-package com.member.entity;
+package com.member.address;
 
+import com.member.member.MemberEntity;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -28,8 +29,8 @@ public class AddressEntity implements Serializable {
     private String postCode;
 
     @ManyToOne
-    @JoinColumn(name = "book_id")
-    private MemberEntity bookDetails;
+    @JoinColumn(name = "member_id")
+    private MemberEntity memberDetails;
 
     public long getId() {
         return id;
@@ -79,11 +80,11 @@ public class AddressEntity implements Serializable {
         this.postCode = postCode;
     }
 
-    public MemberEntity getBookDetails() {
-        return bookDetails;
+    public MemberEntity getMemberDetails() {
+        return memberDetails;
     }
 
-    public void setBookDetails(MemberEntity bookDetails) {
-        this.bookDetails = bookDetails;
+    public void setMemberDetails(MemberEntity memberDetails) {
+        this.memberDetails = memberDetails;
     }
 }

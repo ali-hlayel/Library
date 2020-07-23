@@ -1,5 +1,6 @@
-package com.member.entity;
+package com.member.member;
 
+import com.member.address.AddressEntity;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -7,7 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name="books")
+@Table(name="members")
 public class MemberEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,7 +32,7 @@ public class MemberEntity implements Serializable {
     @NotNull
     private String serialNumber;
 
-    @OneToMany(mappedBy = "bookDetails", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "memberDetails", cascade = CascadeType.ALL)
     private List<AddressEntity> addresses;
 
     public long getId() {

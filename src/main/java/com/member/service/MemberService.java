@@ -1,7 +1,7 @@
 package com.member.service;
 
 import com.member.member.Member;
-import com.member.entity.MemberEntity;
+import com.member.member.MemberEntity;
 import com.member.model.MemberUpdateQueryModel;
 
 import java.util.List;

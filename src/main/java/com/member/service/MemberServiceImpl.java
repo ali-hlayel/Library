@@ -2,7 +2,7 @@ package com.member.service;
 
 import com.member.address.Address;
 import com.member.member.Member;
-import com.member.entity.MemberEntity;
+import com.member.member.MemberEntity;
 import com.member.exceptions.MemberServiceException;
 import com.member.exceptions.ErrorMessages;
 import com.member.model.MemberUpdateQueryModel;

@@ -1,6 +1,6 @@
 package com.member.repository;
 
-import com.member.entity.MemberEntity;
+import com.member.member.MemberEntity;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
