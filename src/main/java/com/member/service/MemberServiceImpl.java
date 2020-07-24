@@ -13,6 +13,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.NoResultException;
@@ -85,5 +87,10 @@ public class MemberServiceImpl implements MemberService {
         MemberEntity result = memberRepository.findMemberById(id);
         if(result == null) throw new MemberServiceException(ErrorMessages.BOOK_IS_NOT_FOUND.getErrorMessage());
         memberRepository.delete(result);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        return null;
     }
 }

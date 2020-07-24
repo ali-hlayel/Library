@@ -3,10 +3,11 @@ package com.member.service;
 import com.member.member.Member;
 import com.member.member.MemberEntity;
 import com.member.model.MemberUpdateQueryModel;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
-public interface MemberService {
+public interface MemberService extends UserDetailsService {
 
     Member createMember(Member member);
 
