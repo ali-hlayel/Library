@@ -34,6 +34,14 @@ public class MemberEntity implements Serializable {
     @NotNull
     private String memberId;
 
+    @Column(length = 100, unique = true)
+    @NotNull
+    private String emailAddress;
+
+    @Column(length = 100, unique = true)
+    @NotNull
+    private String password;
+
     @Column(length = 70)
     private LocalDate birthDate;
 
@@ -86,6 +94,22 @@ public class MemberEntity implements Serializable {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getMemberId() {

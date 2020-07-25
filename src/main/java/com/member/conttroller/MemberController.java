@@ -15,9 +15,11 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("members")
@@ -39,12 +41,12 @@ public class MemberController {
     }
 
     @GetMapping(path = "/{id}")
-    public EntityModel<MemberResponseModel> getBook(@PathVariable long id) {
+    public MemberResponseModel getBook(@PathVariable long id) {
         Member member = memberService.getMemberById(id);
         ModelMapper modelMapper = new ModelMapper();
         MemberResponseModel returnValue = modelMapper.map(member, MemberResponseModel.class);
         Link memberLink = WebMvcLinkBuilder.linkTo(MemberController.class).slash(id).withRel("members");
-        return EntityModel.of(returnValue, memberLink);
+        return returnValue;
     }
 
     @PostMapping

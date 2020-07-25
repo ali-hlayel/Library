@@ -13,7 +13,11 @@ public class MemberCreateQueryModel {
 
     private String memberId;
 
+    private String emailAddress;
+
     private LocalDate birthDate;
+
+    private String password;
 
     private List<AddressRequestModel> addresses;
 
@@ -55,6 +59,22 @@ public class MemberCreateQueryModel {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
     public String getMemberId() {

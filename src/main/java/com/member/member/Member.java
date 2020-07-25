@@ -8,8 +8,6 @@ import java.util.List;
 
 public class Member implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
     private long id;
 
     private String firstName;
@@ -21,6 +19,10 @@ public class Member implements Serializable {
     private LocalDate birthDate;
 
     private String memberId;
+
+    private String emailAddress;
+
+    private String password;
 
     private List<Address> addresses;
 
@@ -70,6 +72,22 @@ public class Member implements Serializable {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
     public String getMemberId() {

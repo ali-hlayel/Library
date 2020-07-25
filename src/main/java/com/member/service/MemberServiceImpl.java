@@ -13,8 +13,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.NoResultException;
@@ -26,6 +28,9 @@ public class MemberServiceImpl implements MemberService {
 
     @Autowired
     MemberRepository memberRepository;
+
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     Utils utils;
@@ -48,16 +53,17 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Member createMember(Member member) {
-        if(memberRepository.findByFirstName(member.getFirstName()) != null) throw new RuntimeException("Book already Exist");
+        if(memberRepository.findByFirstName(member.getEmailAddress()) != null) throw new RuntimeException("member already Exist");
 
         for(Address address: member.getAddresses()) {
             address.setMemberDetails(member);
         }
 
         ModelMapper modelMapper = new ModelMapper();
-        MemberEntity MemberEntity;
-        MemberEntity = modelMapper.map(member, MemberEntity.class);
-        MemberEntity savedBookDetails = memberRepository.save(MemberEntity);
+        MemberEntity memberEntity;
+        memberEntity = modelMapper.map(member, MemberEntity.class);
+        memberEntity.setPassword(bCryptPasswordEncoder.encode(member.getPassword()));
+        MemberEntity savedBookDetails = memberRepository.save(memberEntity);
         Member returnValue = modelMapper.map(savedBookDetails, Member.class);
         return returnValue;
     }
@@ -90,7 +96,9 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return null;
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+            MemberEntity memberEntity = memberRepository.findByEmail(email);
+            if (memberEntity == null) throw  new UsernameNotFoundException(email);
+        return new User(memberEntity.getEmailAddress(), memberEntity.getPassword(), new ArrayList<>());
     }
 }

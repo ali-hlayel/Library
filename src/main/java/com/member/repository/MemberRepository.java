@@ -10,4 +10,6 @@ public interface MemberRepository extends PagingAndSortingRepository<MemberEntit
     MemberEntity findByFirstName(String firstName);
 
     MemberEntity findMemberById(long id);
+
+    MemberEntity findByEmail(String email);
 }
