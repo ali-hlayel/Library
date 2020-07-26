@@ -1,5 +1,6 @@
 package com.member;
 
+import com.member.security.AppProperties;
 import com.member.security.SpringApplicationContext;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,5 +22,10 @@ public class MemberApplication {
 	@Bean
 	public SpringApplicationContext springApplicationContext() {
 		return new SpringApplicationContext();
+	}
+
+	@Bean(name = "AppProperties")
+	public AppProperties getAppProperties() {
+		return new AppProperties();
 	}
 }
