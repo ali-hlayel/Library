@@ -1,4 +1,4 @@
-package com.member.repository;
+package com.member.repositories;
 
 import com.member.member.MemberEntity;
 import org.springframework.data.repository.PagingAndSortingRepository;

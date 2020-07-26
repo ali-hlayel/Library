@@ -6,7 +6,7 @@ import com.member.member.MemberEntity;
 import com.member.exceptions.MemberServiceException;
 import com.member.exceptions.ErrorMessages;
 import com.member.model.MemberUpdateQueryModel;
-import com.member.repository.MemberRepository;
+import com.member.repositories.MemberRepository;
 import com.member.utils.Utils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
@@ -53,7 +53,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Member createMember(Member member) {
-        if(memberRepository.findByFirstName(member.getEmailAddress()) != null) throw new RuntimeException("member already Exist");
+        if(memberRepository.findByFirstName(member.getEmail()) != null) throw new RuntimeException("member already Exist");
 
         for(Address address: member.getAddresses()) {
             address.setMemberDetails(member);
@@ -99,6 +99,15 @@ public class MemberServiceImpl implements MemberService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
             MemberEntity memberEntity = memberRepository.findByEmail(email);
             if (memberEntity == null) throw  new UsernameNotFoundException(email);
-        return new User(memberEntity.getEmailAddress(), memberEntity.getPassword(), new ArrayList<>());
+        return new User(memberEntity.getEmail(), memberEntity.getPassword(), new ArrayList<>());
+    }
+
+    @Override
+    public Member getMember(String email) {
+        MemberEntity memberEntity = memberRepository.findByEmail(email);
+        if(memberEntity == null) throw  new UsernameNotFoundException(email);
+        Member returnValue = new Member();
+        BeanUtils.copyProperties(memberEntity, returnValue);
+        return returnValue;
     }
 }

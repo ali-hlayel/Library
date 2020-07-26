@@ -1,5 +1,6 @@
 package com.member;
 
+import com.member.security.SpringApplicationContext;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -17,4 +18,8 @@ public class MemberApplication {
 		return new BCryptPasswordEncoder();
 	}
 
+	@Bean
+	public SpringApplicationContext springApplicationContext() {
+		return new SpringApplicationContext();
+	}
 }

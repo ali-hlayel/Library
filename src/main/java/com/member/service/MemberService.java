@@ -17,6 +17,8 @@ public interface MemberService extends UserDetailsService {
 
     void deleteMember(long id);
 
+    Member getMember(String email);
+
     List<MemberEntity> getMembers(int page, int limit);
 
 }

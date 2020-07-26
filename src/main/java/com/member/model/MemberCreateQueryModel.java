@@ -13,7 +13,7 @@ public class MemberCreateQueryModel {
 
     private String memberId;
 
-    private String emailAddress;
+    private String email;
 
     private LocalDate birthDate;
 
@@ -61,8 +61,8 @@ public class MemberCreateQueryModel {
         this.birthDate = birthDate;
     }
 
-    public String getEmailAddress() {
-        return emailAddress;
+    public String getEmail() {
+        return email;
     }
 
     public String getPassword() {
@@ -73,8 +73,8 @@ public class MemberCreateQueryModel {
         this.password = password;
     }
 
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getMemberId() {

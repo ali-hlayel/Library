@@ -20,7 +20,7 @@ public class Member implements Serializable {
 
     private String memberId;
 
-    private String emailAddress;
+    private String email;
 
     private String password;
 
@@ -58,14 +58,6 @@ public class Member implements Serializable {
         this.serialNumber = serialNumber;
     }
 
-    public List<Address> getAddresses() {
-        return addresses;
-    }
-
-    public void setAddresses(List<Address> addresses) {
-        this.addresses = addresses;
-    }
-
     public LocalDate getBirthDate() {
         return birthDate;
     }
@@ -74,8 +66,20 @@ public class Member implements Serializable {
         this.birthDate = birthDate;
     }
 
-    public String getEmailAddress() {
-        return emailAddress;
+    public String getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -86,15 +90,11 @@ public class Member implements Serializable {
         this.password = password;
     }
 
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
+    public List<Address> getAddresses() {
+        return addresses;
     }
 
-    public String getMemberId() {
-        return memberId;
-    }
-
-    public void setMemberId(String memberId) {
-        this.memberId = memberId;
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
     }
 }

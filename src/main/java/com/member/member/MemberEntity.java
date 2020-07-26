@@ -36,7 +36,7 @@ public class MemberEntity implements Serializable {
 
     @Column(length = 100, unique = true)
     @NotNull
-    private String emailAddress;
+    private String email;
 
     @Column(length = 100, unique = true)
     @NotNull
@@ -96,12 +96,12 @@ public class MemberEntity implements Serializable {
         this.birthDate = birthDate;
     }
 
-    public String getEmailAddress() {
-        return emailAddress;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
