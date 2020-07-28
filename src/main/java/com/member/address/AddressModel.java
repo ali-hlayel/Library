@@ -1,36 +1,22 @@
 package com.member.address;
 
-import com.member.member.MemberEntity;
-import com.sun.istack.NotNull;
+import com.member.member.MemberModel;
 
-import javax.persistence.*;
-import java.io.Serializable;
+public class AddressModel {
 
-@Entity(name = "addresses")
-public class AddressEntity implements Serializable {
-
-    @Id
-    @GeneratedValue
     private long id;
 
-    @NotNull
     private String city;
 
-    @NotNull
     private String country;
 
-    @NotNull
     private String streetName;
 
-    @NotNull
     private String streetNumber;
 
-    @NotNull
     private String postCode;
 
-    @ManyToOne
-    @JoinColumn(name = "member_id")
-    private MemberEntity memberDetails;
+    private MemberModel memberModelDetails;
 
     public long getId() {
         return id;
@@ -80,11 +66,11 @@ public class AddressEntity implements Serializable {
         this.postCode = postCode;
     }
 
-    public MemberEntity getMemberDetails() {
-        return memberDetails;
+    public MemberModel getMemberModelDetails() {
+        return memberModelDetails;
     }
 
-    public void setMemberDetails(MemberEntity memberDetails) {
-        this.memberDetails = memberDetails;
+    public void setMemberModelDetails(MemberModel memberModelDetails) {
+        this.memberModelDetails = memberModelDetails;
     }
 }

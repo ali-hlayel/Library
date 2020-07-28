@@ -1,6 +1,6 @@
 package com.member.responseModel;
 
-import com.member.member.Member;
+import com.member.member.MemberModel;
 
 public class AddressResponseModel {
 
@@ -14,7 +14,7 @@ public class AddressResponseModel {
 
     private String postCode;
 
-    private Member memberDetails;
+    private MemberModel memberModelDetails;
 
     public String getCity() {
         return city;
@@ -56,11 +56,11 @@ public class AddressResponseModel {
         this.postCode = postCode;
     }
 
-    public Member getMemberDetails() {
-        return memberDetails;
+    public MemberModel getMemberModelDetails() {
+        return memberModelDetails;
     }
 
-    public void setMemberDetails(Member memberDetails) {
-        this.memberDetails = memberDetails;
+    public void setMemberModelDetails(MemberModel memberModelDetails) {
+        this.memberModelDetails = memberModelDetails;
     }
 }

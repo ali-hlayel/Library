@@ -1,52 +1,30 @@
 package com.member.member;
 
-import com.member.address.AddressEntity;
-import com.sun.istack.NotNull;
+import com.member.address.AddressModel;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-@Entity
-@Table(name="members")
-public class MemberEntity implements Serializable {
+public class MemberModel implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue
     private long id;
 
-    @Column(length = 100, unique = true)
-    @NotNull
     private String firstName;
 
-    @Column(length = 50)
-    @NotNull
     private String lastName;
 
-    @Column(length = 70)
-    @NotNull
     private String serialNumber;
 
-    @Column(length = 70)
-    @NotNull
-    private String memberId;
-
-    @Column(length = 100, unique = true)
-    @NotNull
-    private String email;
-
-    @Column(length = 100, unique = true)
-    @NotNull
-    private String password;
-
-    @Column(length = 70)
     private LocalDate birthDate;
 
-    @OneToMany(mappedBy = "memberDetails", cascade = CascadeType.ALL)
-    private List<AddressEntity> addresses;
+    private String memberId;
+
+    private String email;
+
+    private String password;
+
+    private List<AddressModel> addressModels;
 
     public long getId() {
         return id;
@@ -80,20 +58,20 @@ public class MemberEntity implements Serializable {
         this.serialNumber = serialNumber;
     }
 
-    public List<AddressEntity> getAddresses() {
-        return addresses;
-    }
-
-    public void setAddresses(List<AddressEntity> addresses) {
-        this.addresses = addresses;
-    }
-
     public LocalDate getBirthDate() {
         return birthDate;
     }
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public String getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
     }
 
     public String getEmail() {
@@ -112,11 +90,11 @@ public class MemberEntity implements Serializable {
         this.password = password;
     }
 
-    public String getMemberId() {
-        return memberId;
+    public List<AddressModel> getAddressModels() {
+        return addressModels;
     }
 
-    public void setMemberId(String memberId) {
-        this.memberId = memberId;
+    public void setAddressModels(List<AddressModel> addressModels) {
+        this.addressModels = addressModels;
     }
 }

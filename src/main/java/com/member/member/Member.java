@@ -1,29 +1,51 @@
 package com.member.member;
 
 import com.member.address.Address;
+import com.sun.istack.NotNull;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
+@Entity
+@Table(name="members")
 public class Member implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue
     private long id;
 
+    @Column(length = 100, unique = true)
+    @NotNull
     private String firstName;
 
+    @Column(length = 50)
+    @NotNull
     private String lastName;
 
+    @Column(length = 70)
+    @NotNull
     private String serialNumber;
 
-    private LocalDate birthDate;
-
+    @Column(length = 70)
+    @NotNull
     private String memberId;
 
+    @Column(length = 100, unique = true)
+    @NotNull
     private String email;
 
+    @Column(length = 100, unique = true)
+    @NotNull
     private String password;
 
+    @Column(length = 70)
+    private LocalDate birthDate;
+
+    @OneToMany(mappedBy = "memberDetails", cascade = CascadeType.ALL)
     private List<Address> addresses;
 
     public long getId() {
@@ -58,20 +80,20 @@ public class Member implements Serializable {
         this.serialNumber = serialNumber;
     }
 
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }
+
     public LocalDate getBirthDate() {
         return birthDate;
     }
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
-    }
-
-    public String getMemberId() {
-        return memberId;
-    }
-
-    public void setMemberId(String memberId) {
-        this.memberId = memberId;
     }
 
     public String getEmail() {
@@ -90,11 +112,11 @@ public class Member implements Serializable {
         this.password = password;
     }
 
-    public List<Address> getAddresses() {
-        return addresses;
+    public String getMemberId() {
+        return memberId;
     }
 
-    public void setAddresses(List<Address> addresses) {
-        this.addresses = addresses;
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
     }
 }

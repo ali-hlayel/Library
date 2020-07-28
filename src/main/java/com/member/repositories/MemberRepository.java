@@ -1,15 +1,20 @@
 package com.member.repositories;
 
-import com.member.member.MemberEntity;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import com.member.member.Member;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-public interface MemberRepository extends PagingAndSortingRepository<MemberEntity, Long> {
+public interface MemberRepository extends JpaRepository<Member, Long>, JpaSpecificationExecutor<Member> {
 
-    MemberEntity findByFirstName(String firstName);
+    Member findByFirstName(String firstName);
 
-    MemberEntity findMemberById(long id);
+    Member findByEmail(String email);
 
-    MemberEntity findByEmail(String email);
+    @Query(value = "select * from members m where m.first_name = ?1", nativeQuery = true)
+    List<Member> findAllMembersByFirstName(String firstName);
 }

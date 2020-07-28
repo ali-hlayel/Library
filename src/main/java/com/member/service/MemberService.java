@@ -1,24 +1,21 @@
 package com.member.service;
 
+import com.member.member.MemberModel;
 import com.member.member.Member;
-import com.member.member.MemberEntity;
 import com.member.model.MemberUpdateQueryModel;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
-public interface MemberService extends UserDetailsService {
+public interface MemberService {
 
-    Member createMember(Member member);
+    MemberModel createMember(MemberModel memberModel);
 
     Member getMemberById(long id);
 
-    Member updateMember(long id, MemberUpdateQueryModel book);
+    Member updateMember(long id, Member member);
 
     void deleteMember(long id);
 
-    Member getMember(String email);
-
-    List<MemberEntity> getMembers(int page, int limit);
+    List<Member> getMembers(int page, int limit);
 
 }

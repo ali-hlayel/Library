@@ -4,7 +4,6 @@ import com.member.address.Address;
 import com.member.member.Member;
 import com.member.responseModel.MemberResponseModel;
 import com.member.service.MemberService;
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,7 +22,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 @ExtendWith(SpringExtension.class)
 //@WebAppConfiguration
-class MemberControllerTest {
+class MemberModelControllerTest {
 
     @InjectMocks
     MemberController memberController;
@@ -50,7 +49,6 @@ class MemberControllerTest {
         Member member = createMember();
         when(memberService.getMemberById(any(Long.class))).thenReturn(member);
         MemberResponseModel memberResponseModel = memberController.getBook(1L);
-
     }
 
     @Test
@@ -72,21 +70,25 @@ class MemberControllerTest {
         member.setSerialNumber("123123");
         member.setMemberId("ali.hlayel");
         member.setLastName("Hlayel");
+        member.setPassword("TestPass");
+        member.setEmail("aliihlail@gmail.com");
         member.setBirthDate(LocalDate.of(2020,12,12));
-        member.setAddresses(getAddress());
+        Address address = getAddress();
+        address.setMemberDetails(member);
+        List<Address> addresses = new ArrayList<>();
+        addresses.add(address);
+        member.setAddresses(addresses);
         return member;
     }
 
-    private static List<Address> getAddress() {
+    private static Address getAddress() {
         Address address = new Address();
-        List<Address> addresses = new ArrayList<>();
         address.setCity("Berlin");
         address.setCountry("Germany");
         address.setId(1L);
         address.setPostCode("13507");
         address.setStreetName("Schulstrasse");
         address.setStreetNumber("11-A");
-        addresses.add(address);
-        return addresses;
+        return address;
     }
 }
