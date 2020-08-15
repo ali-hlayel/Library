@@ -40,27 +40,27 @@ class MemberModelControllerTest {
     }
 
     @Test
-    void getBooks() {
+    void getMembers() {
 
     }
 
     @Test
-    void testGetBook() {
+    void testGetMember() {
         Member member = createMember();
         when(memberService.getMemberById(any(Long.class))).thenReturn(member);
-        MemberResponseModel memberResponseModel = memberController.getBook(1L);
+        MemberResponseModel memberResponseModel = memberController.getMember(1L);
     }
 
     @Test
-    void testCreateBook() {
+    void testCreateMember() {
     }
 
     @Test
-    void testUpdateBook() {
+    void testUpdateMember() {
     }
 
     @Test
-    void testDeleteBook() {
+    void testDeleteMember() {
     }
 
     private static Member createMember() {

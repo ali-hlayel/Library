@@ -13,6 +13,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 class MemberRepositoryTest {
@@ -24,12 +26,20 @@ class MemberRepositoryTest {
     void setUp() throws Exception {}
 
     @Test
-    final void testFindMemberByFirstNameAndLastName() {
+    final void testFindMemberByFirstName() {
         Member member = createMember();
         memberRepository.save(member);
         List<Member> result = memberRepository.findAllMembersByFirstName("Ali");
-      //  assertEquals("Ali",result.get(0).getFirstName());
+        assertEquals("Ali",result.get(0).getFirstName());
     }
+    @Test
+    final void testFindMemberByLastName() {
+        Member member = createMember();
+        memberRepository.save(member);
+        List<Member> result = memberRepository.findAllMembersByLastName("Hlayel");
+        assertEquals("Hlayel",result.get(0).getLastName());
+    }
+
     private static Member createMember() {
         Member member = new Member();
         member.setId(1L);

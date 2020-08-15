@@ -6,6 +6,7 @@ import com.sun.istack.NotNull;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -47,6 +48,12 @@ public class Member implements Serializable {
 
     @OneToMany(mappedBy = "memberDetails", cascade = CascadeType.ALL)
     private List<Address> addresses;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @JoinTable(name = "members_roles",
+            joinColumns = @JoinColumn(name = "members_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "roles_id", referencedColumnName = "id"))
+    private Collection<RoleEntity> roles;
 
     public long getId() {
         return id;

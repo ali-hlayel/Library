@@ -28,8 +28,8 @@ public class MemberController {
     MemberService memberService;
 
     @GetMapping
-    public List<MemberResponseModel> getBooks(@RequestParam(value = "page", defaultValue = "0") int page,
-                                              @RequestParam(value = "limit", defaultValue = "10") int limit) {
+    public List<MemberResponseModel> getMembers(@RequestParam(value = "page", defaultValue = "0") int page,
+                                                @RequestParam(value = "limit", defaultValue = "10") int limit) {
         List<MemberResponseModel> returnValue = new ArrayList<>();
         List<Member> books = memberService.getMembers(page, limit);
         ModelMapper modelMapper = new ModelMapper();
@@ -40,7 +40,7 @@ public class MemberController {
     }
 
     @GetMapping(path = "/{id}")
-    public MemberResponseModel getBook(@PathVariable long id) {
+    public MemberResponseModel getMember(@PathVariable long id) {
         Member member = memberService.getMemberById(id);
         ModelMapper modelMapper = new ModelMapper();
         MemberResponseModel returnValue = modelMapper.map(member, MemberResponseModel.class);
@@ -72,7 +72,7 @@ public class MemberController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public OperationStatusModel deleteBook(@PathVariable long id) {
+    public OperationStatusModel deleteMember(@PathVariable long id) {
         OperationStatusModel returnValue = new OperationStatusModel();
         returnValue.setOperationName("Delete");
         memberService.deleteMember(id);
